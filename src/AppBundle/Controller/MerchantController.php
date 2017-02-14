@@ -2,13 +2,11 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Model\Entity\AuthorisedRequest;
 use Money\Money;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 
 /**
  * @Route("/merchants")
@@ -26,13 +24,8 @@ class MerchantController extends Controller
     public function captureAction($authorisationId)
     {
         $amount = $this->get('app.request_content')->get('amount');
-        $authorisation = $this->get('app.repository.authorised_request')->find($authorisationId);
 
-        if (!$authorisation instanceof AuthorisedRequest) {
-            throw new ResourceNotFoundException(
-                sprintf('Authorisation with id [%s] not found', $authorisationId)
-            );
-        }
+        $authorisation = $this->get('app.repository.authorised_request')->findAuthorisationById($authorisationId);
 
         $authorisation->capture(Money::GBP($amount));
 
@@ -52,13 +45,8 @@ class MerchantController extends Controller
     public function refundAction($authorisationId)
     {
         $amount = $this->get('app.request_content')->get('amount');
-        $authorisation = $this->get('app.repository.authorised_request')->find($authorisationId);
 
-        if (!$authorisation instanceof AuthorisedRequest) {
-            throw new ResourceNotFoundException(
-                sprintf('Authorisation with id [%s] not found', $authorisationId)
-            );
-        }
+        $authorisation = $this->get('app.repository.authorised_request')->findAuthorisationById($authorisationId);
 
         $authorisation->refund(Money::GBP($amount));
 
@@ -78,13 +66,8 @@ class MerchantController extends Controller
     public function reverseAction($authorisationId)
     {
         $amount = $this->get('app.request_content')->get('amount');
-        $authorisation = $this->get('app.repository.authorised_request')->find($authorisationId);
 
-        if (!$authorisation instanceof AuthorisedRequest) {
-            throw new ResourceNotFoundException(
-                sprintf('Authorisation with id [%s] not found', $authorisationId)
-            );
-        }
+        $authorisation = $this->get('app.repository.authorised_request')->findAuthorisationById($authorisationId);
 
         $authorisation->reverse(Money::GBP($amount));
 
