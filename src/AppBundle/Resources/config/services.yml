@@ -1,0 +1,22 @@
+services:
+    app.repository.card:
+        class: AppBundle\Repository\DoctrineCardRepository
+        factory: ['@doctrine.orm.default_entity_manager', getRepository]
+        arguments:
+            - AppBundle\Model\Entity\Card
+
+    app.repository.authorised_request:
+        class: AppBundle\Repository\DoctrineAuthorisedRequestRepository
+        factory: ['@doctrine.orm.default_entity_manager', getRepository]
+        arguments:
+            - AppBundle\Model\Entity\AuthorisedRequest
+
+    app.exception_subscriber:
+        class: AppBundle\Subscriber\ExceptionSubscriber
+        tags:
+            - { name: kernel.event_subscriber }
+
+    app.request_content:
+        class: AppBundle\Services\RequestContent
+        arguments:
+            - '@request_stack'

@@ -42,6 +42,9 @@ twig:
 # Doctrine Configuration
 doctrine:
     dbal:
+        types:
+            money:  AppBundle\Doctrine\Type\MoneyType
+            currency:  AppBundle\Doctrine\Type\CurrencyType
         driver:   pdo_mysql
         host:     "%database_host%"
         port:     "%database_port%"
@@ -59,7 +62,19 @@ doctrine:
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
         naming_strategy: doctrine.orm.naming_strategy.underscore
-        auto_mapping: true
+        auto_mapping: false
+        mappings:
+            ValueObject:
+                type: xml
+                is_bundle: false
+                prefix: Money
+                dir: '%kernel.root_dir%/../src/AppBundle/Resources/config/doctrine/value_object'
+            AppEntities:
+                type: xml
+                is_bundle: false
+                prefix: AppBundle\Model\Entity
+                dir: '%kernel.root_dir%/../src/AppBundle/Resources/config/doctrine/entity'
+
 
 # Swiftmailer Configuration
 swiftmailer:

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+        http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="AppBundle\Model\Entity\AuthorisedRequest"
+            table="authorised_requests"
+            repository-class="AppBundle\Repository\DoctrineAuthorisedRequestRepository"
+    >
+        <id name="id" type="string" length="255" />
+        <field name="merchantId" type="string" length="255" />
+        <field name="createdAt" type="datetime" length="255" />
+        <embedded name="transactionAmount" class="Money\Money" />
+        <embedded name="capturedAmount" class="Money\Money" />
+        <embedded name="reversedAmount" class="Money\Money" />
+        <embedded name="refundAmount" class="Money\Money" />
+
+        <many-to-one target-entity="AppBundle\Model\Entity\Card" field="card" />
+    </entity>
+
+</doctrine-mapping>
