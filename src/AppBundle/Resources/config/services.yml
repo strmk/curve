@@ -20,3 +20,8 @@ services:
         class: AppBundle\Services\RequestContent
         arguments:
             - '@request_stack'
+
+    app.cors_subscriber:
+        class: AppBundle\Subscriber\CorsSubscriber
+        tags:
+            - {name: kernel.event_listener, event: kernel.response, method: onKernelResponse}
