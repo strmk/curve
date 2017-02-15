@@ -20,9 +20,9 @@ DirectoryIndex app.php
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
-    Header set Access-Control-Allow-Origin "*"
-    Header set Access-Control-Allow-Methods "POST, GET, OPTIONS, DELETE, PUT"
-    Header set Access-Control-Max-Age "1000"
+#    Header set Access-Control-Allow-Origin "*"
+#    Header set Access-Control-Allow-Methods "POST, GET, OPTIONS, DELETE, PUT"
+#    Header set Access-Control-Max-Age "1000"
 
     # Determine the RewriteBase automatically and set it as environment variable.
     # If you are using Apache aliases to do mass virtual hosting or installed the
