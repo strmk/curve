@@ -136,12 +136,4 @@ class AuthorisedRequest
     {
         return $this->capturedAmount;
     }
-
-//    /**
-//     * @return Card
-//     */
-//    public function getCard()
-//    {
-//        return $this->card;
-//    }
 }
